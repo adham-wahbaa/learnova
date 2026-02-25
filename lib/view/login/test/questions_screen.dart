@@ -14,7 +14,7 @@ class QuestionsScreen extends StatefulWidget {
 class _QuestionsScreenState extends State<QuestionsScreen> {
   int _currentQuestionIndex = 0;
   int? _selectedAnswerIndex;
-  final int _totalQuestions = 3;
+  final int _totalQuestions = 1;
 
   @override
   Widget build(BuildContext context) {

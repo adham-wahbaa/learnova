@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:learnova/conest/colors.dart';
-import 'package:learnova/view/login/test/test_description.dart';
-import 'package:learnova/view/login/test/final_result.dart';
-import 'package:learnova/view/login/test/test_model.dart';
+import 'package:learnova/core/theme/app_colors.dart';
+import 'package:learnova/core/widgets/custom_button.dart';
+import 'package:learnova/core/widgets/space_scaffold.dart';
+import 'package:learnova/features/assessment/domain/models/assessment_test_model.dart';
+import 'package:learnova/features/assessment/presentation/screens/test_description_screen.dart';
+import 'package:learnova/features/assessment/presentation/screens/final_results_summary_screen.dart';
 
 class TestCompleteScreen extends StatelessWidget {
   final int testIndex;
@@ -13,22 +15,13 @@ class TestCompleteScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    final currentResult = TestCategoryModel.tests[testIndex];
-    final bool isLastTest = testIndex == TestCategoryModel.tests.length - 1;
+    final currentResult = AssessmentTestModel.tests[testIndex];
+    final bool isLastTest = testIndex == AssessmentTestModel.tests.length - 1;
 
-    return Scaffold(
-      backgroundColor: ColorManager.background,
-      body: Stack(
+    return SpaceScaffold(
+      child: Stack(
         children: [
-          // 1. Background Layer
-          Positioned.fill(
-            child: Image.asset(
-              'assets/SpaceBackground.png',
-              fit: BoxFit.cover,
-            ),
-          ),
-
-          // 2. Base Top SVG (Constant Background Shape)
+          // Base Top SVG (Constant Background Shape)
           Positioned(
             top: size.height * 0.29,
             left: 0,
@@ -40,8 +33,6 @@ class TestCompleteScreen extends StatelessWidget {
               alignment: Alignment.topCenter,
             ),
           ),
-
-          // 3. Colored Top SVG from Figma (Radial Gradients)
           Positioned(
             top: 0,
             left: 0,
@@ -54,7 +45,7 @@ class TestCompleteScreen extends StatelessWidget {
             ),
           ),
 
-          // 4. Bottom SVG Layer (Using minibot.svg)
+          // Bottom SVG Layer (Using minibot.svg)
           Positioned(
             bottom: 0,
             left: 0,
@@ -67,7 +58,7 @@ class TestCompleteScreen extends StatelessWidget {
             ),
           ),
 
-          // 5. Content Layer
+          // Content Layer
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40.0),
@@ -78,8 +69,7 @@ class TestCompleteScreen extends StatelessWidget {
                     currentResult.icon,
                     width: 80,
                     height: 80,
-                    colorFilter: const ColorFilter.mode(
-                        Colors.white, BlendMode.srcIn),
+                    colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
                   ),
                   const SizedBox(height: 20),
                   Text(
@@ -96,7 +86,7 @@ class TestCompleteScreen extends StatelessWidget {
                     currentResult.resultDesc,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
-                      color: Colors.white70,
+                      color: ColorManager.textSecondary,
                       fontSize: 16,
                       height: 1.4,
                     ),
@@ -111,7 +101,7 @@ class TestCompleteScreen extends StatelessWidget {
                       fontStyle: FontStyle.italic,
                       shadows: [
                         Shadow(
-                          color: ColorManager.primary.withOpacity(0.8),
+                          color: ColorManager.primary.withValues(alpha: 0.8),
                           blurRadius: 25,
                         ),
                       ],
@@ -135,41 +125,26 @@ class TestCompleteScreen extends StatelessWidget {
                     }),
                   ),
                   const SizedBox(height: 32),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 56,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        if (isLastTest) {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const FinalResultScreen(),
-                            ),
-                          );
-                        } else {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  TestDescription(testIndex: testIndex + 1),
-                            ),
-                          );
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        foregroundColor: ColorManager.secondary,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                      child: Text(
-                        isLastTest ? 'Finish All Tests' : 'Next test',
-                        style: const TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                    ),
+                  CustomButton(
+                    text: isLastTest ? 'Finish All Tests' : 'Next test',
+                    onPressed: () {
+                      if (isLastTest) {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const FinalResultsSummaryScreen(),
+                          ),
+                        );
+                      } else {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                TestDescriptionScreen(testIndex: testIndex + 1),
+                          ),
+                        );
+                      }
+                    },
                   ),
                   const SizedBox(height: 40),
                 ],
