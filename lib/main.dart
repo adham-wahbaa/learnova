@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:learnova/core/theme/app_theme.dart';
 import 'package:learnova/features/auth/presentation/screens/login_screen.dart';
 
+import 'features/home/presentation/screens/home_screen.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -15,7 +17,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Learnova',
       theme: AppTheme.darkTheme,
-      home: const LoginScreen(),
+      home: const HomeScreen(),
     );
   }
 }
