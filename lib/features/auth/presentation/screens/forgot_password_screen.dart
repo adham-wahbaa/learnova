@@ -50,8 +50,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return SpaceScaffold(
-      topWavePath: 'assets/waves/top2.svg',
-      bottomWavePath: 'assets/waves/bottom2.svg',
+      topWavePaths: const  ['assets/waves/top2.svg'],
+      bottomWavePaths: ['assets/waves/bottom2.svg'],
       child: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

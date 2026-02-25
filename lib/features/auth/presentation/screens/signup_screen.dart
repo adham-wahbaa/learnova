@@ -22,119 +22,139 @@ class _SignupScreenState extends State<SignupScreen> {
     final double keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
 
     return SpaceScaffold(
-      topWavePath: 'assets/waves/top.svg',
-      bottomWavePath: 'assets/waves/bottom.svg',
+      resizeToAvoidBottomInset: false,
+      topWavePaths: const [
+        'assets/waves/top.svg',
+        'assets/waves/primeTop.svg',
+      ],
+      bottomWavePaths: const [
+        'assets/waves/primebottom.svg',
+        'assets/waves/bottom.svg',
+      ],
       child: SafeArea(
         bottom: false,
-        child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Padding(
-            padding: EdgeInsets.only(
-              left: 32.0,
-              right: 32.0,
-              bottom: keyboardHeight + 32,
-            ),
-            child: Column(
-              children: [
-                const SizedBox(height: 80),
-                const Center(
-                  child: Text(
-                    'Sign Up',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 48,
-                      fontWeight: FontWeight.bold,
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: constraints.maxHeight,
+                ),
+                child: IntrinsicHeight(
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      left: 32.0,
+                      right: 32.0,
+                      bottom: keyboardHeight + 32,
                     ),
-                  ),
-                ),
-                const SizedBox(height: 48),
-                _buildTextField(label: 'Username'),
-                const SizedBox(height: 24),
-                _buildTextField(label: 'Email'),
-                const SizedBox(height: 24),
-                _buildTextField(
-                  label: 'Password',
-                  isPassword: true,
-                  obscureText: _obscurePassword,
-                  onToggleVisibility: () => setState(
-                    () => _obscurePassword = !_obscurePassword,
-                  ),
-                ),
-                const SizedBox(height: 24),
-                _buildTextField(
-                  label: 'Confirm Password',
-                  isPassword: true,
-                  obscureText: _obscureConfirmPassword,
-                  onToggleVisibility: () => setState(
-                    () => _obscureConfirmPassword = !_obscureConfirmPassword,
-                  ),
-                ),
-                const SizedBox(height: 16),
-                Row(
-                  children: [
-                    Checkbox(
-                      value: _agreeToTerms,
-                      onChanged: (value) => setState(
-                        () => _agreeToTerms = value ?? false,
-                      ),
-                      side: const BorderSide(color: Colors.white),
-                      checkColor: ColorManager.secondary,
-                      activeColor: Colors.white,
-                    ),
-                    const Expanded(
-                      child: Text(
-                        'I agree to the terms and conditions',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 80),
+                        const Center(
+                          child: Text(
+                            'Sign Up',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 48,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 32),
-                
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      'Already have account? ',
-                      style: TextStyle(color: ColorManager.textSecondary),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) => const LoginScreen()),
-                        );
-                      },
-                      child: const Text(
-                        'Login',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
+                        const SizedBox(height: 48),
+                        _buildTextField(label: 'Username'),
+                        const SizedBox(height: 24),
+                        _buildTextField(label: 'Email'),
+                        const SizedBox(height: 24),
+                        _buildTextField(
+                          label: 'Password',
+                          isPassword: true,
+                          obscureText: _obscurePassword,
+                          onToggleVisibility: () => setState(
+                            () => _obscurePassword = !_obscurePassword,
+                          ),
                         ),
-                      ),
-                    ),
-                    const Text(
-                      ' here!',
-                      style: TextStyle(color: ColorManager.textSecondary),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 24),
+                        const SizedBox(height: 24),
+                        _buildTextField(
+                          label: 'Confirm Password',
+                          isPassword: true,
+                          obscureText: _obscureConfirmPassword,
+                          onToggleVisibility: () => setState(
+                            () => _obscureConfirmPassword = !_obscureConfirmPassword,
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: _agreeToTerms,
+                              onChanged: (value) => setState(
+                                () => _agreeToTerms = value ?? false,
+                              ),
+                              side: const BorderSide(color: Colors.white),
+                              checkColor: ColorManager.secondary,
+                              activeColor: Colors.white,
+                            ),
+                            const Expanded(
+                              child: Text(
+                                'I agree to the terms and conditions',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        
+                        const Spacer(), // يرفع المحتوى العلوي للأعلى ويدفع السفلي للأسفل
+                        
+                        const SizedBox(height: 32),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text(
+                              'Already have account? ',
+                              style: TextStyle(color: ColorManager.textSecondary),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(builder: (context) => const LoginScreen()),
+                                );
+                              },
+                              child: const Text(
+                                'Login',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            const Text(
+                              ' here!',
+                              style: TextStyle(color: ColorManager.textSecondary),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 24),
 
-                CustomButton(
-                  text: 'Save & Continue',
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => const AvatarSelectionScreen()),
-                    );
-                  },
+                        CustomButton(
+                          text: 'Save & Continue',
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(builder: (context) => const AvatarSelectionScreen()),
+                            );
+                          },
+                        ),
+                        const SizedBox(height: 32),
+                      ],
+                    ),
+                  ),
                 ),
-                const SizedBox(height: 32),
-              ],
-            ),
-          ),
+              ),
+            );
+          },
         ),
       ),
     );

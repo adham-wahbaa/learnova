@@ -16,15 +16,15 @@ class TestQuestionsScreen extends StatefulWidget {
 class _TestQuestionsScreenState extends State<TestQuestionsScreen> {
   int _currentQuestionIndex = 0;
   int? _selectedAnswerIndex;
-  final int _totalQuestions = 15;
+  final int _totalQuestions = 1;
 
   @override
   Widget build(BuildContext context) {
     double progress = (_currentQuestionIndex + 1) / _totalQuestions;
 
     return SpaceScaffold(
-      topWavePath: 'assets/waves/test/teststartop.svg',
-      bottomWavePath: 'assets/waves/test/teststartbot.svg',
+      topWavePaths: ['assets/waves/test/teststartop.svg'],
+      bottomWavePaths: ['assets/waves/test/teststartbot.svg'],
       child: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30.0),

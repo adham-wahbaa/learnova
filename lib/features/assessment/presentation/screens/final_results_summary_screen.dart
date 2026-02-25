@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:learnova/core/theme/app_colors.dart';
-import 'package:learnova/core/widgets/space_scaffold.dart';
 import 'package:learnova/features/assessment/domain/models/assessment_test_model.dart';
 
 class FinalResultsSummaryScreen extends StatelessWidget {
@@ -9,10 +8,12 @@ class FinalResultsSummaryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SpaceScaffold(
-      child: Stack(
+    return Scaffold(
+      backgroundColor: ColorManager.background,
+      body: Stack(
         children: [
-          // Background Bubbles (PNGs)
+          // 1. Background Space Image
+          // 2. Background Bubbles (PNGs)
           Positioned(
             top: -50,
             right: -50,
@@ -22,7 +23,7 @@ class FinalResultsSummaryScreen extends StatelessWidget {
             ),
           ),
           Positioned(
-            bottom: 100,
+            bottom: 50,
             left: -80,
             child: Opacity(
               opacity: 0.4,
@@ -38,6 +39,7 @@ class FinalResultsSummaryScreen extends StatelessWidget {
             ),
           ),
 
+          // 3. Content Layer
           SafeArea(
             child: Center(
               child: SingleChildScrollView(
@@ -62,7 +64,7 @@ class FinalResultsSummaryScreen extends StatelessWidget {
                           ),
                           child: const Column(
                             children: [
-                              SizedBox(height: 110),
+                              SizedBox(height: 135),
                               Text(
                                 'Tests Results:',
                                 style: TextStyle(
@@ -78,13 +80,13 @@ class FinalResultsSummaryScreen extends StatelessWidget {
                         
                         // Avatar
                         Positioned(
-                          top: -100,
+                          top: -151,
                           child: Stack(
                             alignment: Alignment.center,
                             children: [
                               Container(
-                                width: 200,
-                                height: 200,
+                                width: 270,
+                                height: 270,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   color: const Color(0xFFD9E9F2).withValues(alpha: 0.7),
@@ -93,8 +95,8 @@ class FinalResultsSummaryScreen extends StatelessWidget {
                               ClipOval(
                                 child: SvgPicture.asset(
                                   'assets/avatar/avatar1.svg',
-                                  width: 170,
-                                  height: 170,
+                                  width: 226,
+                                  height: 226,
                                   fit: BoxFit.cover,
                                 ),
                               ),

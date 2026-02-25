@@ -22,8 +22,14 @@ class _LoginScreenState extends State<LoginScreen> {
     final double keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
 
     return SpaceScaffold(
-      topWavePath: 'assets/waves/top2.svg', // Assuming these exist in waves folder
-      bottomWavePath: 'assets/waves/bottom2.svg',
+      topWavePaths: const [
+        'assets/waves/top2.svg',
+        'assets/waves/primeTop2.svg',
+      ],
+      bottomWavePaths: const [
+        'assets/waves/bottom2.svg',
+        'assets/waves/primebottom2.svg',
+      ],
       child: SafeArea(
         bottom: false,
         child: SingleChildScrollView(

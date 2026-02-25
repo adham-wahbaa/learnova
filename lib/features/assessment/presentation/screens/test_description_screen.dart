@@ -18,8 +18,8 @@ class TestDescriptionScreen extends StatelessWidget {
     final isLastTest = testIndex == AssessmentTestModel.tests.length - 1;
 
     return SpaceScaffold(
-      topWavePath: 'assets/waves/test/teststartop.svg',
-      bottomWavePath: 'assets/waves/test/teststartbot.svg',
+      topWavePaths: ['assets/waves/test/teststartop.svg'],
+      bottomWavePaths: ['assets/waves/test/teststartbot.svg'],
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,

@@ -56,8 +56,8 @@ class _AssessmentMapScreenState extends State<AssessmentMapScreen> {
   @override
   Widget build(BuildContext context) {
     return SpaceScaffold(
-      topWavePath: 'assets/waves/test/teststartop.svg',
-      bottomWavePath: 'assets/waves/test/teststartbot.svg',
+      topWavePaths: ['assets/waves/test/teststartop.svg'],
+      bottomWavePaths: ['assets/waves/test/teststartbot.svg'],
       child: SafeArea(
         child: Column(
           children: [

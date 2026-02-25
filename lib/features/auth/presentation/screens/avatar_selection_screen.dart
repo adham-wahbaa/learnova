@@ -35,8 +35,8 @@ class _AvatarSelectionScreenState extends State<AvatarSelectionScreen> {
   @override
   Widget build(BuildContext context) {
     return SpaceScaffold(
-      topWavePath: 'assets/top.svg',
-      bottomWavePath: 'assets/bottomhigh.svg',
+      topWavePaths: ['assets/top.svg'],
+      bottomWavePaths: ['assets/bottomhigh.svg'],
       child: SafeArea(
         child: Column(
           children: [

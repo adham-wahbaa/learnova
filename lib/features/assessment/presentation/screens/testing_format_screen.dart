@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:learnova/core/widgets/space_scaffold.dart';
 import 'package:learnova/core/widgets/custom_button.dart';
 import 'package:learnova/core/theme/app_colors.dart';
+import 'package:learnova/features/assessment/presentation/screens/test_description_screen.dart';
 // import 'test_description_screen.dart'; // سأقوم بإنشائه بعد قليل
 
 class TestingFormatScreen extends StatefulWidget {
@@ -17,8 +18,8 @@ class _TestingFormatScreenState extends State<TestingFormatScreen> {
   @override
   Widget build(BuildContext context) {
     return SpaceScaffold(
-      topWavePath: 'assets/waves/test/teststartop.svg',
-      bottomWavePath: 'assets/waves/test/teststartbot.svg',
+      topWavePaths: ['assets/waves/test/teststartop.svg'],
+      bottomWavePaths: ['assets/waves/test/teststartbot.svg'],
       child: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 40.0),
@@ -94,7 +95,7 @@ class _TestingFormatScreenState extends State<TestingFormatScreen> {
               CustomButton(
                 text: 'Next',
                 onPressed: _selectedFormat != null ? () {
-                  // Navigator.push(context, MaterialPageRoute(builder: (context) => const TestDescriptionScreen(testIndex: 0)));
+                   Navigator.push(context, MaterialPageRoute(builder: (context) => const TestDescriptionScreen(testIndex: 0)));
                 } : null,
               ),
               const SizedBox(height: 40),

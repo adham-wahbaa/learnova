@@ -10,8 +10,8 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SpaceScaffold(
-      topWavePath: 'assets/waves/welcoming_waves/top1.svg',
-      bottomWavePath: 'assets/waves/welcoming_waves/bottom1.svg',
+      topWavePaths: ['assets/waves/welcoming_waves/top1.svg'],
+      bottomWavePaths: ['assets/waves/welcoming_waves/bottom1.svg'],
       child: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 40.0),
